@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Auther L
 # Date 2017-10-01
-# Version 1.0
+# Version 1.0.1
 
 from __future__ import print_function, unicode_literals
 from socket import AF_INET, AF_INET6, inet_ntop, inet_pton, gethostbyname, htonl
@@ -324,6 +324,8 @@ class LLK(object):
             if r[0] == 2:
                 index = len(wtmp_log) - 1 - i
                 break
+        else:
+            index = 0
         utmp_log = []
         ttys = []
         for r in wtmp_log[index:]:
