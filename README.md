@@ -1,9 +1,9 @@
 # 0x00 LLK
 LLK(Login Log checK&faKe) 是一个Linux登录日志伪造和检测日志伪造的工具，工作原理是通过读取和修改下面的二进制日志：
-  /var/log/wtmp
-  /var/log/btmp
-  /var/run/utmp
-  /var/log/lastlog
+- /var/log/wtmp    (last)
+- /var/log/btmp	   (lastb)
+- /var/run/utmp    (who & w)
+- /var/log/lastlog (lastlog)
 
 项目地址：[https://github.com/L-codes/LLK](https://github.com/L-codes/LLK)
 
@@ -17,7 +17,36 @@ LLK(Login Log checK&faKe) 是一个Linux登录日志伪造和检测日志伪造�
 
 # 0x02 Parameter description
 ```
-$ python3 oneshellcrack.py -h
+$ ./llk.py
+usage: llk.py <command> [options] [-h]
+
+<Commands>
+  list      Print log
+  check     Check log
+  add       Add log    (only btmp)
+  delete    Delete log (only btmp)
+  modify    Modify log (only wtmp & btmp)
+  import    Import log (only wtmp & btmp)
+  export    Export log
+
+$ ./llk.py modify -h
+usage: llk.py modify [options]
+
+positional arguments:
+  {wtmp,btmp}      Log name
+
+optional arguments:
+  -h, --help       show this help message and exit
+  -touser TO_USER  TO USERNAME
+  -tohost TO_HOST  TO HOST
+  -topid TO_PID    TO PID
+  -user USER       USERNAME
+  -host HOST       HOST
+  -pid PID         PID
+  -time TIME       TIME
+  -start TIME      Start time. e.g. 2017/1/1-08:00
+  -end TIME        End time. e.g. 2017/1/1-09:00
+  --ignore-ctime   Ignore ctime. Avoid modifying system time
 ```
 
 # 0x03 Use examples
