@@ -105,7 +105,7 @@ root     pts/1        172.16.178.1     Fri Sep  8 11:16 - 11:37  (00:20)
 root     pts/1        172.16.178.1     Fri Sep  8 04:43 - 04:57  (00:13)
 hacker   pts/1        172.16.178.12    Thu Sep  7 21:24 - 00:54  (03:29)
 
-$ sudo ./llk.py modify wtmp -user hacker -touser root -ip 172.16.178.1
+$ sudo ./llk.py modify wtmp -user hacker -touser root -tohost 172.16.178.1
 
 $ last
 .....

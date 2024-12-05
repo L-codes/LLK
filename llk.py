@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Auther L
 # Date 2017-10-01
-# Version 1.0.1
+# Version 1.0.2
 
 from __future__ import print_function, unicode_literals
 from socket import AF_INET, AF_INET6, inet_ntop, inet_pton, gethostbyname, htonl
@@ -25,15 +25,15 @@ import platform
 class LLK(object):
     def __init__(self, args):
         self.default_logpath = {
-            'wtmp': '/var/log/',
-            'utmp': '/var/run/',
-            'btmp': '/var/log/',
+            'wtmp':    '/var/log/',
+            'utmp':    '/var/run/',
+            'btmp':    '/var/log/',
             'lastlog': '/var/log/'
         }
         self.logs_fmt = {
-            'wtmp': 'hi32s4s32s256shhiii16s20x',
-            'utmp': 'hi32s4s32s256shhiii16s20x',
-            'btmp': 'hi32s4s32s256shhiii16s20x',
+            'wtmp':    'hi32s4s32s256shhiii16s20x',
+            'utmp':    'hi32s4s32s256shhiii16s20x',
+            'btmp':    'hi32s4s32s256shhiii16s20x',
             'lastlog': 'I32s256s'
         }
         Xtmp_head = ['TYPE', 'PID', 'TTY', 'tty', 'USER', 'HOST', 'T', 'E', 'S', 'TIME', 'MS', 'IP']
@@ -77,7 +77,11 @@ class LLK(object):
                 new.append(c)
             return new
 
-        fmt_size = struct.calcsize(fmt)
+        try:
+            fmt_size = struct.calcsize(fmt)
+        except Exception as e:
+            fmt_size = struct.calcsize(bytes(fmt))
+
         result = []
         try:
             with open(path, 'rb') as f:
@@ -461,7 +465,7 @@ class LLK(object):
         if self.args.ignore_ctime:
             cmd = 'touch -a --date "{2}" "{0}" && touch -m --date "{1}" "{0}"'
         else:
-            cmd = ('LLK_NOW=`date` && touch -a --date "{2}" "{0}" && '
+            cmd = ('LLK_NOW=`LC_ALL=C date` && touch -a --date "{2}" "{0}" && '
                    'date -s "{1}" && touch -m --date "{1}" "{0}" && '
                    'date -s "$LLK_NOW" && unset LLK_NOW')
         os.popen(cmd.format(logpath, mctime, atime)).read()
