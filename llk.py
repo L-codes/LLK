@@ -461,7 +461,7 @@ class LLK(object):
         with open(logpath, 'wb') as f:
             for r in records:
                 r = str2bytes(r, logname)
-                f.write(struct.pack(logfmt, *r))
+                f.write(struct.pack(str(logfmt), *r))
         if self.args.ignore_ctime:
             cmd = 'touch -a --date "{2}" "{0}" && touch -m --date "{1}" "{0}"'
         else:
