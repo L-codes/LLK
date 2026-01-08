@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Auther L
 # Date 2017-10-01
-# Version 1.0.2
+# Version 1.0.3
 
 from __future__ import print_function, unicode_literals
 from socket import AF_INET, AF_INET6, inet_ntop, inet_pton, gethostbyname, htonl
